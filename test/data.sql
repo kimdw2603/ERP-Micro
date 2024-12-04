@@ -677,11 +677,26 @@ VALUES
 
 INSERT INTO account (account_code, account_name, debit_credit_indicator, account_type, is_active)
 VALUES
-('AC00001', 'Cash', 'Debit', 'Assets', 1),
-('AC00002', 'Accounts Receivable', 'Debit', 'Assets', 1),
-('AC00003', 'Accounts Payable', 'Credit', 'Liabilities', 1),
-('AC00004', 'Sales Revenue', 'Credit', 'Income', 1),
-('AC00005', 'Rent Expense', 'Debit', 'Expenses', 1);
+  ('AC00001', 'Cash', 'Debit', 'Assets', 1),
+  ('AC00002', 'Accounts Receivable', 'Debit', 'Assets', 1),
+  ('AC00003', 'Accounts Payable', 'Credit', 'Liabilities', 1),
+  ('AC00004', 'Sales Revenue', 'Credit', 'Income', 1),
+  ('AC00005', 'Rent Expense', 'Debit', 'Expenses', 1),
+  ('AC00006', 'Inventory', 'Debit', 'Assets', 1),
+  ('AC00007', 'Prepaid Expenses', 'Debit', 'Assets', 1),
+  ('AC00008', 'Accumulated Depreciation', 'Credit', 'Assets', 1),
+  ('AC00009', 'Notes Payable', 'Credit', 'Liabilities', 1),
+  ('AC00010', 'Salaries Payable', 'Credit', 'Liabilities', 1),
+  ('AC00011', 'Interest Revenue', 'Credit', 'Income', 1),
+  ('AC00012', 'Service Revenue', 'Credit', 'Income', 1),
+  ('AC00013', 'Utilities Expense', 'Debit', 'Expenses', 1),
+  ('AC00014', 'Insurance Expense', 'Debit', 'Expenses', 1),
+  ('AC00015', 'Office Supplies Expense', 'Debit', 'Expenses', 1),
+  ('AC00016', 'Equipment', 'Debit', 'Assets', 1),
+  ('AC00017', 'Building', 'Debit', 'Assets', 1),
+  ('AC00018', 'Land', 'Debit', 'Assets', 1),
+  ('AC00019', 'Capital Stock', 'Credit', 'Equity', 1),
+  ('AC00020', 'Retained Earnings', 'Credit', 'Equity', 1);
 
 INSERT INTO budget (budget_ID, dept_ID, project_ID, account_period_ID)
 VALUES
@@ -689,19 +704,6 @@ VALUES
 ('BU00002', 'DE00002', 'PJ00002', 'AP00002'),
 ('BU00003', 'DE00003', 'PJ00003', 'AP00003'),
 ('BU00004', 'DE00004', 'PJ00004', 'AP00004');
-
-INSERT INTO journal (journal_ID, total_debit, total_credit, dept_ID, is_approved)
-VALUES
-('JN00001', 1200000.00, 0.00, 'DE00005', 1),
-('JN00002', 700000.00, 0.00, 'DE00005', 1),
-('JN00003', 2500000.00, 0.00, 'DE00005', 0),
-('JN00004', 450000.00, 0.00, 'DE00005', 1),
-('JN00005', 2300000.00, 0.00, 'DE00005', 1),
-('JN00006', 0.00, 1700000.00, 'DE00003', 1),
-('JN00007', 0.00, 2200000.00, 'DE00003', 1),
-('JN00008', 0.00, 3000000.00, 'DE00003', 1),
-('JN00009', 0.00, 1300000.00, 'DE00003', 1),
-('JN00010', 0.00, 2500000.00, 'DE00003', 0);
 
 INSERT INTO approval (approval_ID, journal_ID, status, approver_ID, approved_date)
 VALUES
@@ -716,28 +718,120 @@ VALUES
 ('AP00009', 'JN00008', 'Pending', 'EM00001', NULL),
 ('AP00010', 'JN00009', 'Pending', 'EM00001', NULL);
 
+INSERT INTO journal (journal_ID, total_debit, total_credit, dept_ID, is_approved)
+VALUES
+('JN00001', 1200000.00, 1200000.00, 'DE00005', 1),
+('JN00002', 700000.00, 700000.00, 'DE00005', 1),
+('JN00003', 2500000.00, 2500000.00, 'DE00005', 0),
+('JN00004', 450000.00, 450000.00, 'DE00005', 1),
+('JN00005', 2300000.00, 2300000.00, 'DE00005', 1),
+('JN00011', 1500000.00, 1500000.00, 'DE00005', 1),
+('JN00012', 900000.00, 900000.00, 'DE00005', 1),
+('JN00006', 1700000.00, 1700000.00, 'DE00003', 1),
+('JN00007', 2200000.00, 2200000.00, 'DE00003', 1),
+('JN00008', 3000000.00, 3000000.00, 'DE00003', 1),
+('JN00009', 1300000.00, 1300000.00, 'DE00003', 1),
+('JN00010', 2500000.00, 2500000.00, 'DE00003', 0),
+('JN00013', 1800000.00, 1800000.00, 'DE00003', 1),
+('JN00014', 1000000.00, 1000000.00, 'DE00003', 1),
+('JN00015', 750000.00, 750000.00, 'DE00007', 1),
+('JN00016', 500000.00, 500000.00, 'DE00007', 0),
+('JN00017', 2000000.00, 2000000.00, 'DE00009', 1),
+('JN00018', 1200000.00, 1200000.00, 'DE00009', 1),
+('JN00019', 1000000.00, 1000000.00, 'DE00009', 0),
+('JN00020', 800000.00, 800000.00, 'DE00004', 1),
+('JN00021', 650000.00, 650000.00, 'DE00004', 1),
+('JN00022', 1500000.00, 1500000.00, 'DE00004', 0);
+
 INSERT INTO transaction (trans_ID, journal_ID, account_code, trans_date, debit, credit)
 VALUES
+-- JN00001: Cash (Debit) and Accounts Payable (Credit)
 ('TR00001', 'JN00001', 'AC00001', '2024-11-01', 1200000.00, 0.00),
 ('TR00002', 'JN00001', 'AC00003', '2024-11-01', 0.00, 1200000.00),
+
+-- JN00002: Accounts Receivable (Debit) and Notes Payable (Credit)
 ('TR00003', 'JN00002', 'AC00002', '2024-11-02', 700000.00, 0.00),
-('TR00004', 'JN00002', 'AC00003', '2024-11-02', 0.00, 700000.00),
-('TR00005', 'JN00003', 'AC00001', '2024-11-03', 2500000.00, 0.00),
+('TR00004', 'JN00002', 'AC00009', '2024-11-02', 0.00, 700000.00),
+
+-- JN00003: Inventory (Debit) and Accounts Payable (Credit)
+('TR00005', 'JN00003', 'AC00006', '2024-11-03', 2500000.00, 0.00),
 ('TR00006', 'JN00003', 'AC00003', '2024-11-03', 0.00, 2500000.00),
-('TR00007', 'JN00004', 'AC00005', '2024-11-04', 450000.00, 0.00),
+
+-- JN00004: Prepaid Expenses (Debit) and Accounts Payable (Credit)
+('TR00007', 'JN00004', 'AC00007', '2024-11-04', 450000.00, 0.00),
 ('TR00008', 'JN00004', 'AC00003', '2024-11-04', 0.00, 450000.00),
-('TR00009', 'JN00005', 'AC00002', '2024-11-05', 2300000.00, 0.00),
-('TR00010', 'JN00005', 'AC00003', '2024-11-05', 0.00, 2300000.00),
-('TR00011', 'JN00006', 'AC00004', '2024-11-06', 0.00, 1700000.00),
-('TR00012', 'JN00006', 'AC00001', '2024-11-06', 1700000.00, 0.00),
-('TR00013', 'JN00007', 'AC00004', '2024-11-07', 0.00, 2200000.00),
-('TR00014', 'JN00007', 'AC00001', '2024-11-07', 2200000.00, 0.00),
-('TR00015', 'JN00008', 'AC00004', '2024-11-08', 0.00, 3000000.00),
-('TR00016', 'JN00008', 'AC00001', '2024-11-08', 3000000.00, 0.00),
-('TR00017', 'JN00009', 'AC00004', '2024-11-09', 0.00, 1300000.00),
-('TR00018', 'JN00009', 'AC00001', '2024-11-09', 1300000.00, 0.00),
-('TR00019', 'JN00010', 'AC00004', '2024-11-10', 0.00, 2500000.00),
-('TR00020', 'JN00010', 'AC00001', '2024-11-10', 2500000.00, 0.00);
+
+-- JN00005: Equipment (Debit) and Notes Payable (Credit)
+('TR00009', 'JN00005', 'AC00016', '2024-11-05', 2300000.00, 0.00),
+('TR00010', 'JN00005', 'AC00009', '2024-11-05', 0.00, 2300000.00),
+
+-- JN00006: Salaries Payable (Debit) and Sales Revenue (Credit)
+('TR00011', 'JN00006', 'AC00010', '2024-11-06', 1700000.00, 0.00),
+('TR00012', 'JN00006', 'AC00004', '2024-11-06', 0.00, 1700000.00),
+
+-- JN00007: Insurance Expense (Debit) and Accounts Payable (Credit)
+('TR00013', 'JN00007', 'AC00014', '2024-11-07', 2200000.00, 0.00),
+('TR00014', 'JN00007', 'AC00003', '2024-11-07', 0.00, 2200000.00),
+
+-- JN00008: Building (Debit) and Retained Earnings (Credit)
+('TR00015', 'JN00008', 'AC00017', '2024-11-08', 3000000.00, 0.00),
+('TR00016', 'JN00008', 'AC00020', '2024-11-08', 0.00, 3000000.00),
+
+-- JN00009: Utilities Expense (Debit) and Notes Payable (Credit)
+('TR00017', 'JN00009', 'AC00013', '2024-11-09', 1300000.00, 0.00),
+('TR00018', 'JN00009', 'AC00009', '2024-11-09', 0.00, 1300000.00),
+
+-- JN00010: Land (Debit) and Accounts Payable (Credit)
+('TR00019', 'JN00010', 'AC00018', '2024-11-10', 2500000.00, 0.00),
+('TR00020', 'JN00010', 'AC00003', '2024-11-10', 0.00, 2500000.00),
+
+-- JN00011: Cash (Debit) and Accounts Payable (Credit)
+('TR00021', 'JN00011', 'AC00001', '2024-11-11', 1500000.00, 0.00),
+('TR00022', 'JN00011', 'AC00003', '2024-11-11', 0.00, 1500000.00),
+
+-- JN00012: Rent Expense (Debit) and Accounts Payable (Credit)
+('TR00023', 'JN00012', 'AC00005', '2024-11-12', 900000.00, 0.00),
+('TR00024', 'JN00012', 'AC00003', '2024-11-12', 0.00, 900000.00);
+
+-- JN00013: Equipment (Debit) and Notes Payable (Credit)
+('TR00025', 'JN00013', 'AC00016', '2024-11-13', 1800000.00, 0.00),
+('TR00026', 'JN00013', 'AC00009', '2024-11-13', 0.00, 1800000.00),
+
+-- JN00014: Utilities Expense (Debit) and Accounts Payable (Credit)
+('TR00027', 'JN00014', 'AC00013', '2024-11-14', 1000000.00, 0.00),
+('TR00028', 'JN00014', 'AC00003', '2024-11-14', 0.00, 1000000.00),
+
+-- JN00015: Salaries Payable (Debit) and Sales Revenue (Credit)
+('TR00029', 'JN00015', 'AC00010', '2024-11-15', 750000.00, 0.00),
+('TR00030', 'JN00015', 'AC00004', '2024-11-15', 0.00, 750000.00),
+
+-- JN00016: Prepaid Expenses (Debit) and Accounts Payable (Credit)
+('TR00031', 'JN00016', 'AC00007', '2024-11-16', 500000.00, 0.00),
+('TR00032', 'JN00016', 'AC00003', '2024-11-16', 0.00, 500000.00),
+
+-- JN00017: Advertising Expense (Debit) and Accounts Payable (Credit)
+('TR00033', 'JN00017', 'AC00015', '2024-11-17', 2000000.00, 0.00),
+('TR00034', 'JN00017', 'AC00003', '2024-11-17', 0.00, 2000000.00),
+
+-- JN00018: Service Revenue (Debit) and Sales Revenue (Credit)
+('TR00035', 'JN00018', 'AC00012', '2024-11-18', 1200000.00, 0.00),
+('TR00036', 'JN00018', 'AC00004', '2024-11-18', 0.00, 1200000.00),
+
+-- JN00019: Marketing Expense (Debit) and Accounts Payable (Credit)
+('TR00037', 'JN00019', 'AC00005', '2024-11-19', 1000000.00, 0.00),
+('TR00038', 'JN00019', 'AC00003', '2024-11-19', 0.00, 1000000.00),
+
+-- JN00020: Sales Revenue (Debit) and Retained Earnings (Credit)
+('TR00039', 'JN00020', 'AC00004', '2024-11-20', 800000.00, 0.00),
+('TR00040', 'JN00020', 'AC00020', '2024-11-20', 0.00, 800000.00),
+
+-- JN00021: Office Supplies Expense (Debit) and Notes Payable (Credit)
+('TR00041', 'JN00021', 'AC00015', '2024-11-21', 650000.00, 0.00),
+('TR00042', 'JN00021', 'AC00009', '2024-11-21', 0.00, 650000.00),
+
+-- JN00022: Inventory (Debit) and Accounts Payable (Credit)
+('TR00043', 'JN00022', 'AC00006', '2024-11-22', 1500000.00, 0.00),
+('TR00044', 'JN00022', 'AC00003', '2024-11-22', 0.00, 1500000.00);
 
 INSERT INTO use_account (account_code, budget_ID, amount)
 VALUES
